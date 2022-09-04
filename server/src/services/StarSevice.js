@@ -22,13 +22,6 @@ class StarService {
 
         return result;
     }
-
-	// async getOne(id) {
-	// 	if (!id) throw new Error("Id is not specified");
-	// 	console.log(id);
-	// 	const movie = await Movie.findOne({ where: { id } });
-	// 	return movie;
-	// }
 }
 
 export default new StarService();

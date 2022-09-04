@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from 'dotenv';
+import loginRouter from "./routes/LoginRouter.js";
 import movieRouter from "./routes/MovieRouter.js";
+import bodyParser from 'body-parser';
 import db from "./configs/db.js";
 import tables from './configs/tables.js'
 
@@ -12,6 +14,8 @@ const PORT = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json()) 
+app.use(bodyParser.json());
+app.use(loginRouter);
 app.use(movieRouter);
 
 async function startApp() {
