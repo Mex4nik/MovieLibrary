@@ -19,7 +19,7 @@ const Movie = sequelize.define(
             field: 'Format',
             type: DataTypes.STRING,
             validate: {
-                isIn: [[ 'VHS', 'DVD', 'Blu-ray' ]],
+                isIn: [[ 'VHS', 'DVD', 'Blu-Ray' ]],
             }
         },
 	},
