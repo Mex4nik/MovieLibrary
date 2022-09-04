@@ -15,7 +15,7 @@ One note: To use client side, make sure the server side is working on port = 500
 (Is order to not spend a lot of time on it, you don't need to send a body, body can be empty.)
 
 - Movie: 
-- (POST) http://localhost:5000/movie - create new movie
+- (POST) http://localhost:5000/movie - create new movie **(use token from the authorization request)**
 body: {
     "title": "Great movie 1",
     "releaseDate": "2020",
@@ -23,14 +23,14 @@ body: {
     "stars": "Name1 lastName1, Name2 last2"
 }
 
--  (GET) http://localhost:5000/movie/{id} - get one movie by id
--  (GET) http://localhost:5000/movie - get all movies
+-  (GET) http://localhost:5000/movie/{id} - get one movie by id **(use token from the authorization request)**
+-  (GET) http://localhost:5000/movie - get all movies **(use token from the authorization request)**
    List of available queries: 
    - title=string - get movie by title
    - star=string - get movie by actor first name
    - sort=true - get all movies sorted in alphabetical order
    
--  (DELETE) http://localhost:5000/movie/{id} - delete one movie by id
+-  (DELETE) http://localhost:5000/movie/{id} - delete one movie by id **(use token from the authorization request)**
 
 # How to import data from txt?
 - Run with server and client sides.
