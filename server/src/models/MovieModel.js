@@ -1,5 +1,7 @@
-import { Sequelize, DataTypes } from "sequelize";
-const sequelize = new Sequelize("sqlite::memory:");
+import { DataTypes } from "sequelize";
+import db from "../configs/db.js";
+
+const sequelize = db.sequelize;
 
 const Movie = sequelize.define(
 	"Movie",
@@ -20,18 +22,8 @@ const Movie = sequelize.define(
                 isIn: [[ 'VHS', 'DVD', 'Blu-ray' ]],
             }
         },
-		stars: {
-            field: 'Stars',
-            type: DataTypes.STRING,
-            set(val) {
-                const stars = val.split(',').map(star => star.trim());
-                this.setDataValue('Stars', stars);
-            }
-        },
 	},
 	{ tableName: "Movies" }
 );
-
-await Movie.sync();
 
 export default Movie;

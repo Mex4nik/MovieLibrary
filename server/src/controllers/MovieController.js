@@ -19,12 +19,24 @@ class MovieController {
         }
     }
 
-    getAll(req, res) {
-        res.send('getAll')
+    async getAll(req, res) {
+        try {
+            const movies = await MovieService.getAll(req.query);
+            return res.json(movies)
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
 
-    delete(req, res) {
-        res.send('delete')
+    async delete(req, res) {
+        try {
+            await MovieService.delete(req.params.id);
+            return res.json({
+                message: 'Movie was removed successfully'
+            })
+        } catch (error) {
+            res.status(500).json(error)
+        }
     }
 }
 
