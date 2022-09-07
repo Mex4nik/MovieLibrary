@@ -10,9 +10,22 @@ There is two parts of the program.
 One note: To use client side, make sure the server side is working on port = 5000.
 
 # What APIs are implemented
+- User:
+(POST) http://localhost:5000/user - create new user
+{
+    "email": "123",
+    "username": "456",
+    "password": "678",
+    "confirmPassword": "678"
+}
+
 - Login: 
-(POST) http://localhost:5000/login - authorization. Generates jwt token for other requests. 
-(Is order to not spend a lot of time on it, you don't need to send a body, body can be empty.)
+(POST) http://localhost:5000/login - authorization. Generates jwt token for other requests. (Need to put user credentials in body of the request)
+{
+    "username": "456",
+    "password": "678"
+}
+After tocken was generated, you can use it with other requests, using Type: Bearer Token
 
 - Movie: 
 - (POST) http://localhost:5000/movie - create new movie **(use token from the authorization request)**

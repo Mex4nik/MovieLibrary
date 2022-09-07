@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from 'dotenv';
 import loginRouter from "./routes/LoginRouter.js";
 import movieRouter from "./routes/MovieRouter.js";
+import userRouter from "./routes/UserRouter.js";
 import bodyParser from 'body-parser';
 import cors from 'cors'
 import db from "./configs/db.js";
@@ -17,6 +18,7 @@ const app = express();
 app.use(express.json()) 
 app.use(cors())
 app.use(bodyParser.json());
+app.use(userRouter);
 app.use(loginRouter);
 app.use(movieRouter);
 
