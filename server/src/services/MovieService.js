@@ -2,11 +2,20 @@ import Movie, { movieConfig } from "../models/MovieModel.js";
 import Star from "../models/StarModel.js";
 import StarSevice from "./StarSevice.js";
 import validator from 'validator';
+import { stringValidation } from "../configs/validations.js";
 
 class MovieService {
 	async create(movie) {
+		// Validations
 		if (!validator.isAfter(movie.releaseDate, movieConfig.isAfter)) throw new Error("Movie should be released after 1900")
 		if (!validator.isBefore(movie.releaseDate, movieConfig.isBefore)) throw new Error("Movie should be released before 2022")
+		if (!movie.stars) throw new Error("stars field are mandatory")
+
+		stringValidation(movie.title);
+		stringValidation(movie.stars);
+
+		const movieWithSameTitle = await this.getAll({title: movie.title});
+		if (movieWithSameTitle.length) throw new Error("Movie with this title already exists. You can't create this movie again")
 
 		if (movie.stars) movie.Stars = StarSevice.prepareMany(movie.stars);
 

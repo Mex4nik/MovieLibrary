@@ -8,8 +8,8 @@ const MovieList = () => {
 	const [movies, setMovies] = useState([]);
 
 	const fetchMovies = async () => {
-		const token = await LoginService.login();
-		const movies = await MovieService.getAll(token.accessToken);
+		const token = sessionStorage.getItem('jwtToken')
+		const movies = await MovieService.getAll(token);
 		setMovies(movies);
 	};
 
@@ -17,25 +17,44 @@ const MovieList = () => {
 		fetchMovies();
 	}, []);
 
+	const login = async () => {
+		try {
+			const username = prompt('Enter your username');
+			const password = prompt('Enter your password');
+	
+			const token = await LoginService.login({
+				username: username,
+				password: password
+			});
+	
+			sessionStorage.setItem('jwtToken', token.accessToken)	
+		} catch (error) {
+			alert(error)
+		}
+	}
+
 	const handleMoviesUpload = (event) => {
+
 		const file = event.target.files[0];
 
 		var fileReader = new FileReader();
 		fileReader.onload = async function(event) {
 			let text = event.target.result;
-
-			debugger;
 			const movies = parseTxt(text);
 
-			console.log(movies)
+			try {
+				debugger
+				const token = sessionStorage.getItem('jwtToken')
 
-			const token = await LoginService.login();
+				for (let movie of movies) {
+					await MovieService.createOne(token, movie);
+				}
 
-			for (let movie of movies) {
-				await MovieService.createOne(token.accessToken, movie);
+				alert('All movies has been added from the file')
+				window.location.reload(false);
+			} catch(err) {
+				alert(err.response.data.message)
 			}
-			alert('All movies has been added from the file')
-			window.location.reload(false);
 		}
 		
 		fileReader.readAsText(file);
@@ -43,6 +62,7 @@ const MovieList = () => {
 
 	return (
 		<div style={{margin: '0 20rem'}}>
+			<button onClick={login}>Login</button>
 			<div style={{textAlign: 'center', marginBottom: '.5rem'}}>
 				<span style={{marginRight: '.5rem'}}>Import movies</span>
 				<input type='file' onChange={handleMoviesUpload} />
