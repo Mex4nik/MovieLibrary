@@ -1,8 +1,10 @@
 import User from "../models/UserModel.js";
+import validator from 'validator';
 
 class UserService {
 	async create(user) {
 		if (!user.email) throw new Error("Email is empty")
+		if (!validator.isEmail(user.email)) throw new Error("Email is not correct")
 		if (!user.username) throw new Error("Username is empty")
 		if (!user.password) throw new Error("Password is empty")
 		if (!user.confirmPassword) throw new Error("Confirm password is empty")
