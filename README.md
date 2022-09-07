@@ -13,7 +13,7 @@ One note: To use client side, make sure the server side is working on port = 500
 - User:
 (POST) http://localhost:5000/user - create new user
 {
-    "email": "123",
+    "email": "test@email.com",
     "username": "456",
     "password": "678",
     "confirmPassword": "678"

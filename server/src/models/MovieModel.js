@@ -3,6 +3,11 @@ import db from "../configs/db.js";
 
 const sequelize = db.sequelize;
 
+export const movieConfig = {
+	isAfter: "1900", 
+	isBefore: "2022",
+}
+
 const Movie = sequelize.define(
 	"Movie",
 	{

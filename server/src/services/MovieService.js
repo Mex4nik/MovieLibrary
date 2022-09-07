@@ -1,9 +1,13 @@
-import Movie from "../models/MovieModel.js";
+import Movie, { movieConfig } from "../models/MovieModel.js";
 import Star from "../models/StarModel.js";
 import StarSevice from "./StarSevice.js";
+import validator from 'validator';
 
 class MovieService {
 	async create(movie) {
+		if (!validator.isAfter(movie.releaseDate, movieConfig.isAfter)) throw new Error("Movie should be released after 1900")
+		if (!validator.isBefore(movie.releaseDate, movieConfig.isBefore)) throw new Error("Movie should be released before 2022")
+
 		if (movie.stars) movie.Stars = StarSevice.prepareMany(movie.stars);
 
 		const createdMovie = await Movie.create(movie, { include: Star });	

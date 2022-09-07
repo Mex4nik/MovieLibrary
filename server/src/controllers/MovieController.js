@@ -6,7 +6,7 @@ class MovieController {
             const movie = await MovieService.create(req.body)
             res.json(movie)
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({message: error.message})
         }
     }
 
@@ -15,7 +15,7 @@ class MovieController {
             const movie = await MovieService.getOne(req.params.id)
             return res.json(movie)
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({message: error.message})
         }
     }
 
@@ -24,7 +24,7 @@ class MovieController {
             const movies = await MovieService.getAll(req.query);
             return res.json(movies)
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({message: error.message})
         }
     }
 
@@ -35,7 +35,7 @@ class MovieController {
                 message: 'Movie was removed successfully'
             })
         } catch (error) {
-            res.status(500).json(error)
+            res.status(500).json({message: error.message})
         }
     }
 }
