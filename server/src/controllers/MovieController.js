@@ -28,6 +28,15 @@ class MovieController {
         }
     }
 
+    async update(req, res) {
+        try {
+            const movie = await MovieService.update(req.body);
+            return res.json(movie)
+        } catch (error) {
+            res.status(500).json({message: error.message})
+        }
+    }
+
     async delete(req, res) {
         try {
             await MovieService.delete(req.params.id);

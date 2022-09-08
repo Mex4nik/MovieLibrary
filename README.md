@@ -36,6 +36,15 @@ body: {
     "stars": "Name1 lastName1, Name2 last2"
 }
 
+- (PATCH) http://localhost:5000/movie - update the movie data **(use token from the authorization request)**
+{
+    "id": 1,  -- Id of the movie that will be updated
+    "title": "New title",
+    "releaseDate": "2021-12-31",
+    "format": "Blu-Ray",
+    "stars": "Name3 lastName3, Name4 lastName4"
+}
+
 -  (GET) http://localhost:5000/movie/{id} - get one movie by id **(use token from the authorization request)**
 -  (GET) http://localhost:5000/movie - get all movies **(use token from the authorization request)**
    List of available queries: 

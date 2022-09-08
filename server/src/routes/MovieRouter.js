@@ -7,6 +7,7 @@ const movieRouter = new Router();
 movieRouter.post('/movie', authenticateJWT, MovieController.create)
 movieRouter.get('/movie/:id', authenticateJWT, MovieController.getOne)
 movieRouter.get('/movie', authenticateJWT, MovieController.getAll)
+movieRouter.patch('/movie', authenticateJWT, MovieController.update)
 movieRouter.delete('/movie/:id', authenticateJWT, MovieController.delete)
 
 export default movieRouter;

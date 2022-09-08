@@ -55,6 +55,31 @@ class MovieService {
 		return movies;
 	}
 
+	async update(movie) {
+		if (!movie.id) throw new Error("Id is not specified");
+
+		if (!validator.isAfter(movie.releaseDate, movieConfig.isAfter)) throw new Error("Movie should be released after 1900")
+		if (!validator.isBefore(movie.releaseDate, movieConfig.isBefore)) throw new Error("Movie should be released before 2022")
+		if (!movie.stars) throw new Error("stars field are mandatory")
+
+		stringValidation(movie.title);
+		stringValidation(movie.stars);
+
+		await this.delete(movie.id);
+		const createdMovie = await this.create(movie);
+
+		/* Not working because Stars are still not updated
+			// movie.Stars = movie.stars;
+
+			// const prevMovie = await this.getOne(movie.id);
+			// if (!prevMovie) throw new Error("The movie is not found")
+
+			// if (movie.stars) movie.Stars = StarSevice.prepareMany(movie.stars);
+			// const updatedMovie = await prevMovie.update(movie, { where: { id: movie.id }});
+		*/
+		return createdMovie;
+	}
+
 	async delete(id) {
 		if (!id) throw new Error("Id is not specified");
 		const movie = await Movie.destroy({ where: { id } })
