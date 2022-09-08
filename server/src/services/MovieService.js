@@ -3,6 +3,7 @@ import Star from "../models/StarModel.js";
 import StarSevice from "./StarSevice.js";
 import validator from 'validator';
 import { stringValidation } from "../configs/validations.js";
+import { ascendedSort } from "../configs/sort.js";
 
 class MovieService {
 	async create(movie) {
@@ -48,6 +49,13 @@ class MovieService {
 				], 
 				include: Star 
 			});
+
+			const newMovies = [];
+			for (let movie of movies) {
+				newMovies.push(movie.dataValues)
+			}
+
+			movies = ascendedSort(newMovies, 'title')
 		} else {
 			movies = await Movie.findAll({ include: Star });
 		}
