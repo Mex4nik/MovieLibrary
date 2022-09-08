@@ -61,11 +61,11 @@ body: {
 - The page will refresh and you will see your data
 
 # How to test search, with examples
-- Request without search, that show all movies to us
+- Request without search, that show all movies to us  
 ![image](https://user-images.githubusercontent.com/51294476/189198683-845170f1-d22b-40b4-aeb4-8c85f87e47cf.png)
 
-- Request with search by title of the movie
+- Request with search by title of the movie  
 ![image](https://user-images.githubusercontent.com/51294476/189198839-9643cf02-efdb-4c22-9131-64b684ec20a4.png)
 
-- Request with search by star
+- Request with search by star  
 ![image](https://user-images.githubusercontent.com/51294476/189198932-390e76a5-e66c-43fb-b9e0-cc7632c8826c.png)
