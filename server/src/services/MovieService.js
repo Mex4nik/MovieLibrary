@@ -8,8 +8,16 @@ import { ascendedSort } from "../configs/sort.js";
 class MovieService {
 	async create(movie) {
 		// Validations
+		for (let [key, value] of Object.entries(movie)) {
+			if (typeof value == 'string') {
+				value = value.trim()
+			}
+			movie[key] = value
+		}
+
 		if (!validator.isAfter(movie.releaseDate, movieConfig.isAfter)) throw new Error("Movie should be released after 1900")
 		if (!validator.isBefore(movie.releaseDate, movieConfig.isBefore)) throw new Error("Movie should be released before 2022")
+		if (!movie.title) throw new Error("title field are mandatory. Should not have special characters or spaces")
 		if (!movie.stars) throw new Error("stars field are mandatory")
 
 		stringValidation(movie.title, validationTypes.Movie);
