@@ -3,10 +3,10 @@
 There is two parts of the program.
 - Server - the main one.
 - Client - just to show that the api is working.
-
-- Run server side: docker run --name movie-libary -p 5000:5000 -e PORT=5000 mex4nik/movie-library:server
-- Run client side: docker run --name movie-library-client -p 3000:3000 mex4nik/movie-library:client
-
+```
+- Run server side: docker run --name movie-libary -p 5000:5000 -e PORT=5000 mex4nik/movie-library:server-v2
+- Run client side: docker run --name movie-library-client -p 3000:3000 mex4nik/movie-library:client-v2
+```
 One note: To use client side, make sure the server side is working on port = 5000.
 
 # What APIs are implemented
