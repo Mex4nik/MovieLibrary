@@ -6,7 +6,7 @@ class UserController {
             const user = await UserService.create(req.body)
             res.json(user)
         } catch (error) {
-            res.status(500).json({message: error.message})
+            res.status(500).json({message: error.errors[0].message})
         }
     }
 
